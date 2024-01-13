@@ -46,3 +46,10 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+task copyJarToBin(type: Copy) {
+    from "build/libs/springbootdeveloper-0.0.1-SNAPSHOT.jar"
+    into "xinfra/docker/"
+}
+
+build.finalizedBy copyJarToBin
