@@ -5,19 +5,18 @@ metadata:
 data:
   application.yml: |
     spring:
-      jpa:
-        show-sql: true
-        hibernate:
-          ddl-auto: update # create | create-drop | update | validate | none
-        properties:
-          hibernate:
-            dialect: org.hibernate.dialect.PostgreSQLDialect
-            format_sql: true
-        defer-datasource-initialization: true
       datasource:
-        url: jdbc:postgresql://192.168.0.2:5432/postgresdb
-        username: postgres
+        url: jdbc:mysql://localhost:3306/istory
+        username: root
         password: admin123
-    jwt:
-      issuer: dangtong@gmail.com
-      secret_key: study-springboot
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      jpa:
+        database-platform: org.hibernate.dialect.MySQLDialect
+        hibernate:
+          ddl-auto: update
+        show-sql: true
+      application:
+        name: USER-SERVICE
+      jwt:
+        issuer: dangtong@gmail.com
+        secret_key: study-springboot

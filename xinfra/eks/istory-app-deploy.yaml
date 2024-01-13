@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  istory
+  labels:
+    app:  istory
+spec:
+  selector:
+    matchLabels:
+      app: istory
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app:  istory
+    spec:
+      initContainers:
+        - name: check-mysql-ready
+          image: mysql:8.0
+          command: ['sh',
+                    '-c',
+                    'until mysqladmin ping -h postgres-svc.default:5432; do echo waiting for database; sleep 2; echo "good"; done;']
+      containers:
+        - name:  istory
+          image:  dangtong/istory
+          volumeMounts:
+            - name: application-config
+              mountPath: /config
+          resources:
+            requests:
+              cpu: 300m
+              memory: 500Mi
+            limits:
+              cpu: 400m
+              memory: 600Mi
+          readinessProbe:
+            httpGet:
+              path: /actuator
+              port: 8080
+            initialDelaySeconds: 20
+            timeoutSeconds: 3
+            successThreshold: 2
+            failureThreshold: 3
+            periodSeconds: 10
+          ports:
+            - containerPort:  3306
+              name:  istory
+      volumes:
+        - name: application-config
+          configMap:
+            name: istory-app-config
+      restartPolicy: Always

@@ -1,0 +1,61 @@
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: postgres
+#   labels:
+#     app: postgres
+# spec:
+#   containers:
+#     - name: postgres
+#       image: postgres:11.11
+#       envFrom:
+#       - secretRef:
+#           name: istory-db-secret
+#       resources:
+#         requests:
+#           cpu: 300m
+#           memory: 500Mi
+#         limits:
+#           cpu: 500m
+#           memory: 500Mi
+#       ports:
+#         - containerPort: 5432
+#       volumeMounts:
+#         - mountPath: "/var/lib/postgresql/data"
+#           name: postgresql-pv
+#           subPath: postgre
+#   volumes:
+#     - name: postgresql-pv
+#       persistentVolumeClaim:
+#         claimName: postgresql-pvc
+# ---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  containers:
+    - image: mysql:8.0
+      name: mysql
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "500Mi"
+        limits:
+          cpu: "600m"
+          memory: "600Mi"
+      envFrom:
+        - secretRef:
+            name: istory-db-secret
+      ports:
+        - containerPort: 3306
+          name: mysql
+      volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+  volumes:
+    - name: mysql-persistent-storage
+      persistentVolumeClaim:
+        claimName: mysql-pv-claim
