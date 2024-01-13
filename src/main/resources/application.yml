@@ -12,10 +12,8 @@ spring:
   application:
     name: USER-SERVICE
   jwt:
-    issuer: dangtong@gmail.com
+    issuer: user@gmail.com
     secret_key: study-springboot
-
-
 #spring:
 #  jpa:
 #    show-sql: true

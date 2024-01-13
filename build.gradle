@@ -40,6 +40,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.postgresql:postgresql'
     runtimeOnly 'com.mysql:mysql-connector-j'
+    //모니터링
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
 
 }
 
