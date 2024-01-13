@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cstory-deploy
+  labels:
+    app: cstory
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cstory
+  template:
+    metadata:
+      labels:
+        app: cstory
+    spec:
+      containers:
+        - name: cstory
+          image: cstory
+          ports:
+            - containerPort: 80
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
