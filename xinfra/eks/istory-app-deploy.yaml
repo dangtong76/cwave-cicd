@@ -14,12 +14,12 @@ spec:
       labels:
         app:  istory
     spec:
-      initContainers:
-        - name: check-mysql-ready
-          image: mysql:8.0
-          command: ['sh',
-                    '-c',
-                    'until mysqladmin ping -h postgres-svc.default:5432; do echo waiting for database; sleep 2; echo "good"; done;']
+#      initContainers:
+#        - name: check-mysql-ready
+#          image: mysql:8.0
+#          command: ['sh',
+#                    '-c',
+#                    'until mysqladmin ping -h mysql-svc.default:3306; do echo waiting for database; sleep 2; echo "good"; done;']
       containers:
         - name:  istory
           image:  dangtong/istory

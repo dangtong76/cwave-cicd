@@ -8,4 +8,4 @@ spec:
   ports:
     - name: mysql-svc
       protocol: TCP
-      port: 5432
+      port: 3306
