@@ -25,13 +25,24 @@ spec:
                   key: MYSQL_PASSWORD
           command: ['sh',
                     '-c',
-                    'until mysqladmin ping -u dangtong -p${MYSQL_PASSWORD} -h mysql-svc.default; do echo waiting for database; sleep 2; echo "good"; done;']
+                    'until mysqladmin ping -u dangtong -p${MYSQL_PASSWORD} -h mysql-svc.default; do echo waiting for database; sleep 2; done;']
       containers:
         - name:  istory
           image:  dangtong/istory
           envFrom:
             - configMapRef:
                 name: istory-app-config
+          env:
+            - name: spring.datasource.password
+              valueFrom:
+                secretKeyRef:
+                  name: istory-db-secret
+                  key: MYSQL_PASSWORD
+            - name: spring.datasource.username
+              valueFrom:
+                configMapKeyRef:
+                  name: istory-db-config
+                  key: MYSQL_USER
           resources:
             requests:
               cpu: 300m
