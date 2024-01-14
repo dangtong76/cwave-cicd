@@ -1,0 +1,26 @@
+#domain_name: istory
+#deploy:
+#  app_image: dangtong/istory
+#service:
+#  type: LoadBalancer
+#  session_timeout: 800
+#db:
+#  db_image: mysql/mysql-server
+#  mysql_password: 'admin123'
+#  mysql_root_password: 'admin123'
+#  mysql_database: istory
+#  mysql_user: dangtong
+#  disk_size: 10Gi
+#  disk_access_mode: ReadWriteOnce
+#  disk_recliam_policy: Retain
+#  disk_grade: gp2
+---
+domain_name: istory
+deploy:
+  app_image: dangtong/istory
+db:
+  mysql_password: "admin123"
+  mysql_root_password: "admin123"
+  mysql_database: istory
+  mysql_user: dangtong
+  use_persistent: "no"

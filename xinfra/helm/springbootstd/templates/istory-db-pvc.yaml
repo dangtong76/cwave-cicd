@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.domain_name }}-mysql-pv-claim
+  labels:
+    app: {{ .Values.domain_name }}
+spec:
+  storageClassName: gp2-persistent
+  accessModes:
+    - {{ .Values.db.disk_access_mode | default "ReadWriteOnce" }}
+  resources:
+    requests:
+      storage: {{ .Values.db.disk_size | default "10Gi" }}
