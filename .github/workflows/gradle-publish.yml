@@ -41,7 +41,7 @@ jobs:
           arguments: build
 
       - name: 4.Docker Image Build
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/istory
+        run: docker build --platform linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/istory
 
       - name: 5.Docker Login
         uses: docker/login-action@v3.0.0
