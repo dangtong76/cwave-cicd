@@ -37,7 +37,7 @@ metadata:
     app: mysql
 spec:
   containers:
-    - image: mysql:8.0
+    - image: mysql/mysql-server
       name: mysql
       resources:
         requests:
@@ -49,6 +49,8 @@ spec:
       envFrom:
         - secretRef:
             name: istory-db-secret
+        - configMapRef:
+            name: istory-db-config
       ports:
         - containerPort: 3306
           name: mysql
