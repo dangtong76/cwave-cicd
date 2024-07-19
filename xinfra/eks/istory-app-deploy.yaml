@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: istory
-  replicas: 3
+  replicas: 5
   template:
     metadata:
       labels:
@@ -43,13 +43,6 @@ spec:
                 configMapKeyRef:
                   name: istory-db-config
                   key: MYSQL_USER
-          resources:
-            requests:
-              cpu: 300m
-              memory: 500Mi
-            limits:
-              cpu: 400m
-              memory: 600Mi
           readinessProbe:
             httpGet:
               path: /actuator

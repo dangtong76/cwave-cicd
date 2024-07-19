@@ -8,13 +8,6 @@ spec:
   containers:
     - image: mysql/mysql-server
       name: mysql
-      resources:
-        requests:
-          cpu: "500m"
-          memory: "500Mi"
-        limits:
-          cpu: "600m"
-          memory: "600Mi"
       envFrom:
         - secretRef:
             name: istory-db-secret
